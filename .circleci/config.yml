@@ -86,7 +86,7 @@ jobs:
           name: test frontend
           command: |
             cd frontend
-            npm run test
+            npm run test --max_old_space_size=4096
 
 workflows:
   default:
