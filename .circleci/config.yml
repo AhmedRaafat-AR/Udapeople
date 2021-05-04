@@ -48,8 +48,8 @@ jobs:
       - run:
           name: Build front-end
           command: |
+            cd frontend
             npm run build
-            exit 1
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
