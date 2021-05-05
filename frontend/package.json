@@ -124,6 +124,9 @@
       "js",
       "json"
     ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
     "transform": {
       "\\.(ts|tsx)$": "ts-jest"
     },
