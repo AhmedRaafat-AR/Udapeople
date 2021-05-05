@@ -45,6 +45,7 @@ jobs:
           command: |
             cd frontend
             npm i
+            npm i --save oauth-sign  
       - run:
           name: Build front-end
           command: |
@@ -65,8 +66,7 @@ jobs:
           name: Install dependencies
           command: |
               cd backend
-              npm i
-              npm i --save oauth-sign    
+              npm i  
       - run:
           name: Back-end build
           command: |
