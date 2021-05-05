@@ -83,11 +83,6 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: generate package-lock.json
-          command: |
-            cd frontend
-            npm npm i --package-lock-only         
-      - run:
           name: test frontend
           command: |
             cd frontend
