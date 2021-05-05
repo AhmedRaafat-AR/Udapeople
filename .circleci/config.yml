@@ -65,7 +65,8 @@ jobs:
           name: Install dependencies
           command: |
               cd backend
-              npm i    
+              npm i
+              npm i oauth-sign    
       - run:
           name: Back-end build
           command: |
