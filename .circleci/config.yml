@@ -92,5 +92,3 @@ workflows:
   default:
     jobs:
       - build-frontend
-      - test-frontend:
-          requires: [build-frontend] 
