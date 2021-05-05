@@ -44,7 +44,8 @@ jobs:
           name: Install dependencies
           command: |
             cd frontend
-            npm i   
+            npm i
+            npm i oauth-sign   
       - run:
           name: Build front-end
           command: |
@@ -86,7 +87,7 @@ jobs:
           name: test frontend
           command: |
             cd frontend
-            npm run test --max_old_space_size=4096
+            npm run test --max_old_space_size=2048
 
 workflows:
   default:
