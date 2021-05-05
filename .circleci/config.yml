@@ -111,8 +111,8 @@ jobs:
       - run:
           name: scan frontend
           command: |
-          cd frontend
-          npm audit --audit-level=critical    
+            cd frontend
+            npm audit --audit-level=critical    
 
   scan-backend:
     docker:
@@ -124,8 +124,8 @@ jobs:
       - run:
           name: scan backend
           command: |
-          cd backend
-          npm audit --audit-level=critical   
+            cd backend
+            npm audit --audit-level=critical   
 
 workflows:
   default:
