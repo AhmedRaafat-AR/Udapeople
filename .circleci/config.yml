@@ -45,7 +45,6 @@ jobs:
           command: |
             cd frontend
             npm i
-            npm i oauth-sign   
       - run:
           name: Build front-end
           command: |
