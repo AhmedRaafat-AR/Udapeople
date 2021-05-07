@@ -174,9 +174,9 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      - destroy-environment
+      - destroy-environment:
           to: "udapeople-backend"
-      - destroy_environment    
+      - destroy_environment:    
           to: "udapeople-frontend"   
 
 
