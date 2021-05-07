@@ -176,6 +176,7 @@ jobs:
             - project/.circleci/ansible/inventory.txt
       - destroy_environment:
           to: "udapeople-backend"
+      - destroy_environment:    
           to: "udapeople-frontend"   
 
 
