@@ -43,7 +43,8 @@ jobs:
             npm=`npm --version`
             echo $npm >> ver.txt
             node=`node --version`
-            echo $node >> ver.txt 
+            echo $node >> ver.txt
+            cat ver.txt 
 
   build-frontend:
     docker:
