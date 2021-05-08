@@ -205,7 +205,7 @@ jobs:
 workflows:
   default:
     jobs:
-      -test-aws:
+      - test-aws:
           filters:
             branches:
               only: [deploy-infrastructure]      
