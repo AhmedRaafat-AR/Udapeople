@@ -31,24 +31,9 @@ commands:
             fi
             
 jobs:
-  check-versions:
-    docker:
-      - image: circleci/node:13.8.0  
-    steps:
-      - checkout    
-      - run:
-          name: check npm and node versions
-          command: |
-            cd frontend
-            npm=`npm --version`
-            echo $npm >> ver.txt
-            node=`node --version`
-            echo $node >> ver.txt
-            cat ver.txt 
-
   build-frontend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node:14
     steps:
       - checkout
       - restore_cache:
@@ -108,7 +93,7 @@ jobs:
 
   test-backend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node:14
     steps:
       - checkout
       - restore_cache:
@@ -139,7 +124,7 @@ jobs:
 
   scan-backend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node:14
     steps:
       - checkout
       - restore_cache:
@@ -154,14 +139,13 @@ jobs:
 workflows:
   default:
     jobs:
-      - check-versions
-      #- build-frontend
+      - build-frontend
       #- build-backend
-      #- test-frontend:
-      #    requires: [build-frontend]
+      - test-frontend:
+          requires: [build-frontend]
       #- test-backend:
       #    requires: [build-backend]
-      #- scan-backend:
-      #    requires: [build-backend] 
+      - scan-backend:
+          requires: [build-backend] 
       #- scan-frontend:
       #    requires: [build-frontend]   
