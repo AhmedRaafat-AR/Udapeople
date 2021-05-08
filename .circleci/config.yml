@@ -81,6 +81,11 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
+          name: fix test 
+          command: |
+            cd frontend
+            npm install oauth-sign@0.9.0 
+      - run:
           name: test frontend
           command: |
             cd frontend
