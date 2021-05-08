@@ -31,6 +31,16 @@ commands:
             fi
             
 jobs:
+  check-versions:
+    steps:
+      run:
+        name: check npm and node versions
+        command: |
+          cd frontend
+          npm=`npm --version`
+          echo $npm >> ver.txt
+          node=`node --version`
+          echo $node >> ver.txt 
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
