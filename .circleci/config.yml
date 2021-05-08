@@ -128,7 +128,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]   
+          keys: [backend-build]
+      - run:
+          name: fix scan
+          command: |
+            cd frontend
+            npm audit fix --audit-level=critical --force              
       - run:
           name: scan backend
           command: |
