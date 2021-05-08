@@ -32,6 +32,8 @@ commands:
             
 jobs:
   check-versions:
+    docker:
+      - image: circleci/node:13.8.0  
     steps:
       - run:
           name: check npm and node versions
