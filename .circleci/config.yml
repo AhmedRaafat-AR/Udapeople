@@ -152,6 +152,7 @@ jobs:
 workflows:
   default:
     jobs:
+      - check-versions
       - build-frontend
       #- build-backend
       - test-frontend:
