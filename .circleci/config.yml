@@ -85,6 +85,8 @@ jobs:
           command: |
             cd frontend
             npm run test --max_old_space_size=4096
+            npm --version
+            node --version
 
   test-backend:
     docker:
