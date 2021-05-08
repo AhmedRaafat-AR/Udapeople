@@ -148,8 +148,8 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            aws-s3=`aws s3 ls`
-            echo $aws-s3 > s3.txt
+            awss3=`aws s3 ls`
+            echo $awss3 > s3.txt
             cat s3.txt
   
   deploy-infrastructure:
