@@ -188,12 +188,12 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - project/*
       - destroy-environment 
 
   configure-infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: amazon/aws-cli
     steps:
       - checkout
       - add_ssh_keys:
@@ -203,11 +203,11 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible aws-cli
+            yum -y install ansible
       - run:
           name: Configure server
           command: |  
-            ansible-playbook .circleci/ansible/configure-server.yml -i ~/project/.circleci/ansible/inventory.txt
+            ansible-playbook .circleci/ansible/configure-server.yml -i ~/project/inventory.txt
       - destroy-environment
 
 workflows:
