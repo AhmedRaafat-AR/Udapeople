@@ -203,7 +203,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum -y install ansible
+            yum -y install ansible tar
       - run:
           name: Configure server
           command: |  
