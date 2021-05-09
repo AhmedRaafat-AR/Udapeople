@@ -174,7 +174,9 @@ jobs:
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID}" --output text >> inventory.txt
-            cat inventory.txt  
+            cp inventory.txt ~/
+            cat inventory.txt
+            cat ~/inventory.txt  
       - run:
           name: create memstash for back-end dns-name
           command: |
@@ -189,7 +191,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - .circleci/file/ansible/inventory.txt
+            - inventory.txt
       - destroy-environment 
 
   configure-infrastructure:
