@@ -201,7 +201,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum -y install ansible tar unzip
+            yum -y install ansible tar unzip gzip
       - attach_workspace:
           at: ~/            
       - run:
