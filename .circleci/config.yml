@@ -193,7 +193,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: amazon/aws-cli
+      - image: contentwisetv/ansible-aws
     steps:
       - checkout
       - add_ssh_keys:
@@ -201,7 +201,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum -y install ansible tar unzip gzip
+            apk --update add tar gzip
       - attach_workspace:
           at: ~/            
       - run:
