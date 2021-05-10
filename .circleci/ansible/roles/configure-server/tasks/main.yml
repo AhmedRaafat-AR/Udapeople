@@ -4,7 +4,7 @@
   apt:
     update-cache: yes
 
-- name: "upgarde apt package."
+- name: "upgrade apt package."
   become: yes
   apt:
     upgrade: "yes"
@@ -16,9 +16,8 @@
     state: latest
     update_cache: yes
 
-- name: " install pm2"
   become: yes
-  apt:
+  npm:
     name: "pm2"
     global: yes
     production: yes
