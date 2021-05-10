@@ -7,7 +7,7 @@
 - name: "upgarde apt package."
   become: yes
   apt:
-    upgarde: "yes"
+    upgrade: "yes"
 
 - name: " install nodejs."
   become: yes
