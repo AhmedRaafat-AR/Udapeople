@@ -211,7 +211,6 @@ jobs:
           name: Configure server
           environment:
             ANSIBLE_HOST_KEY_CHECKING: False
-            TYPEORM_CONNECTION: ${TYPEORM_CONNECTION}
           command: |
             cd .circleci/ansible 
             ansible-playbook configure-server.yml -i ~/inventory.txt

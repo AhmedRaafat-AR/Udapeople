@@ -24,7 +24,14 @@
     production: yes
     state: present
 
-- name: "Configure environment variables"
-  become: yes
-  shell: |
-    echo "export ENVIRONMENT=production" >> /etc/environment
+- name: "set environment variables"
+  environment:
+    ENVIRONMENT: production
+    TYPEORM_CONNECTION: postgres
+    TYPEORM_ENTITIES: ./src/modules/domain/**/*.entity.ts
+    TYPEORM_HOST: udapeople-devops.cdf8vxstsstl.us-west-2.rds.amazonaws.com
+    TYPEORM_PORT: 5432
+    TYPEORM_USERNAME: postgres
+    TYPEORM_PASSWORD: Udapeople12345!
+    TYPEORM_DATABASE: udapeople-devops
+
