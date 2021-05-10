@@ -9,10 +9,10 @@
   apt:
     upgrade: "yes"
 
-- name: " install nodejs."
+- name: "install nodejs."
   become: yes
   apt:
-    name: ["nodejs","npm"]
+    name: ["nodejs", "npm"]
     state: latest
     update_cache: yes
 
