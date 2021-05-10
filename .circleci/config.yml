@@ -216,22 +216,6 @@ jobs:
             ansible-playbook configure-server.yml -i ~/inventory.txt
       - destroy-environment
 
-  run-migrations:
-    docker:
-      - image: circleci/node:14
-    steps:
-      - checkout
-      - run:
-          name: Run migrations
-          command: |
-            # Your code here
-            exit 1
-      - run:
-          name: Send migration results to memstash
-          command: |
-            # Your code here
-            exit 1
-     # Here's where you will add some code to rollback on failure 
 
 workflows:
   default:
