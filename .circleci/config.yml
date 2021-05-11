@@ -222,6 +222,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: install tar and gzip
+          command: |
+            apt-get install tar gzip
+      - run:
           name: DB Setup
           command: |
             cd backend
@@ -235,6 +239,7 @@ jobs:
             echo "TYPEORM_PASSWORD=${TYPEORM_PASSWORD}" >> .env
             echo "TYPEORM_DATABASE=${TYPEORM_DATABASE}" >> .env
             cat .env
+            cp .env ~/
       - run:
           name: Run migrations
           command: |
@@ -254,6 +259,10 @@ jobs:
             else
             echo "Failed"
             fi
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - .env
       - destroy-environment
 
 
