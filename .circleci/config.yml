@@ -221,10 +221,12 @@ jobs:
       - image: sleavely/node-awscli:14.x
     steps:
       - checkout
+      - restore_cache:
+          keys: [backend-build]
       - run:
-          name: install tar and gzip
+          name: install less
           command: |
-            apt-get install tar gzip
+            apt-get install -yy less
       - run:
           name: DB Setup
           command: |
