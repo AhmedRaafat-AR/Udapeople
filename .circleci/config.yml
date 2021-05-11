@@ -226,7 +226,8 @@ jobs:
       - run:
           name: install less
           command: |
-            sudo apt-get install -yy less
+            apt-get update
+            apt-get install -yy less
       - run:
           name: DB Setup
           command: |
