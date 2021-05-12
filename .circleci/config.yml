@@ -221,8 +221,8 @@ jobs:
       - image: sleavely/node-awscli:14.x
     steps:
       - checkout
-      - restore_cache:
-          keys: [backend-build]
+      #- restore_cache:
+      #    keys: [backend-build]
       - run:
           name: install less
           command: |
@@ -248,6 +248,7 @@ jobs:
           command: |
             cd backend
             npm i
+            npm run build
             npm run migrations > migration_output.txt
             cat migration_output.txt
       - run:
