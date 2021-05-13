@@ -318,6 +318,7 @@ jobs:
             python3 -m pip install --user ansible
       - run:
           name: prepare for deploy
+          command: |
             cp .env backend/
             cd backend
             cat .env
