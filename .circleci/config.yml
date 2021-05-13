@@ -286,15 +286,16 @@ jobs:
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID}" --output text`
 
             export API_URL="http://${BACKEND_IP}:3030"
-            echo "${API_URL}"      
-      - run:
-          name: Deploy frontend objects
-          command: |
-            echo "${API_URL}"   
+            echo "${API_URL}"
             cd frontend
             npm i
             npm run build
-            ls
+            ls .dist
+            ls dist      
+      #- run:
+      #    name: Deploy frontend objects
+      #    command: |
+            
       - destroy-environment
 
 workflows:
