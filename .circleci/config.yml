@@ -278,8 +278,6 @@ jobs:
           command: |
             apt-get update
             apt-get install -yy less
-            cd frontend
-            npm i      
       - run:
           name: Get backend url
           command: |
@@ -288,14 +286,15 @@ jobs:
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID}" --output text`
 
             export API_URL="http://${BACKEND_IP}:3030"
-            echo "${API_URL}"
+            echo "${API_URL}"      
       - run:
           name: Deploy frontend objects
           command: |
+            echo "${API_URL}"   
             cd frontend
-            npm start
+            npm i
             npm run build
-            ls ./dist
+            ls
       - destroy-environment
 
 workflows:
