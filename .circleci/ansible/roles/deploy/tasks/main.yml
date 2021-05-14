@@ -5,8 +5,8 @@
     state: directory
 
 - name: Copy Files
-  template:
-    src: "/*"
+  copy:
+    src: "files/"
     dest: "~/web/"
 
 #- name: Executing node
