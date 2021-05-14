@@ -319,8 +319,8 @@ jobs:
             #ansible --help   
       - run:
           name: prepare for deploy
-          environment:
-            ANSIBLE_HOST_KEY_CHECKING: False          
+          #environment:
+          #  ANSIBLE_HOST_KEY_CHECKING: False          
           command: |
             cp ~/.env backend/
             cd backend
