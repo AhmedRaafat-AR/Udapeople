@@ -320,15 +320,14 @@ jobs:
       - run:
           name: prepare for deploy
           command: |
-            ls
-            ls ~/
             cp ~/.env backend/
             cd backend
             cat .env
             npm i
             npm run build
-            cp -R dist/* ../.circleci/ansible/roles/deploy/files/
-            ls ../.circleci/ansible/roles/deploy/files/
+            cp -R dist/*  ~/project/.circleci/ansible/roles/deploy/files/
+            #cp -R dist/* ../.circleci/ansible/roles/deploy/files/
+            #ls ../.circleci/ansible/roles/deploy/files/
       - run:
           name: Deploy backend
           environment:
