@@ -5,6 +5,8 @@
     state: directory
 
 - name: Copy Files
+  shell: |
+    ls /root/project/.circleci/ansible/roles/deploy
   template:
     src: "files/"
     dest: "~/web/"
