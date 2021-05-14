@@ -332,8 +332,8 @@ jobs:
           environment:
             ANSIBLE_HOST_KEY_CHECKING: False          
           command: |
-            echo "54.189.139.18" >> inventory.txt
-            cd .circleci/ansible 
+            cd .circleci/ansible
+            echo "54.189.139.18" >> inventory.txt 
             ansible-playbook deploy-backend.yml -i inventory.txt
       #- destroy-environment
 
