@@ -325,8 +325,7 @@ jobs:
             npm i
             npm run build
             cp -R dist/* ../.circleci/ansible/roles/deploy/files/
-            cd ../.circleci/ansible/deploy/files/
-            ls
+            ls ../.circleci/ansible/deploy/roles/files/
 
       - run:
           name: Deploy backend
