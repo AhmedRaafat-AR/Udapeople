@@ -324,10 +324,8 @@ jobs:
             cat .env
             npm i
             npm run build
-            cd ../.circleci/ansible/deploy
-            mkdir files
-            cp -R ../backend/dist/.* files/
-            ls files/
+            cp -R dist/.* ../.circleci/ansible/roles/deploy/files/
+            ls ../.circleci/ansible/deploy/files/
       - run:
           name: Deploy backend
           command: |
