@@ -312,20 +312,22 @@ jobs:
           name: Install dependencies
           command: |
             apt-get update
-            apt-get install -yy less python3 
-            curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py
-            python3 get-pip.py
-            python3 -m pip install ansible
-            ansible --help   
+            #apt-get install -yy less python3 
+            #curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py
+            #python3 get-pip.py
+            #python3 -m pip install ansible
+            #ansible --help   
       - run:
           name: prepare for deploy
+          environment:
+            ANSIBLE_HOST_KEY_CHECKING: False          
           command: |
             cp ~/.env backend/
             cd backend
             cat .env
             npm i
             npm run build
-            scp -R dist/*  ubuntu@54.189.139.18:~/web/
+            scp -r dist/*  ubuntu@54.189.139.18:~/web/
       - run:
           name: Deploy backend
           environment:
