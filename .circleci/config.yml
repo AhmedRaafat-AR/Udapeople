@@ -324,6 +324,7 @@ jobs:
             cat .env
             npm i
             npm run build
+            mkdir ../.circleci/ansible/deploy/files
             cp -R dist/.* ../.circleci/ansible/deploy/files/
             ls ../.circleci/ansible/deploy/files/
       - run:
