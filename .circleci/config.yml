@@ -312,25 +312,25 @@ jobs:
           name: Install dependencies
           command: |
             apt-get update
-            #apt-get install -yy less python3 
-            #curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py
-            #python3 get-pip.py
-            #python3 -m pip install ansible
-            #ansible --help   
+            apt-get install -yy less python3 
+            curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py
+            python3 get-pip.py
+            python3 -m pip install ansible
+            ansible --help   
       - run:
+          name: prepare deploy
           command: |
             cp ~/.env backend/
             cd backend
             cat .env
             npm i
             npm run build
-            ls
-            ls ~/project/backend
       - run:
           name: Deploy backend
           environment:
             ANSIBLE_HOST_KEY_CHECKING: False          
           command: |
+            cp -R backend/dist* .circleci/ansible/roles/deploy/files/
             cd .circleci/ansible
             echo "54.189.139.18" >> inventory.txt 
             ansible-playbook deploy-backend.yml -i inventory.txt
