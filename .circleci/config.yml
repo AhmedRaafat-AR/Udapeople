@@ -314,8 +314,8 @@ jobs:
             apt-get update
             apt-get install -yy less python3 
             curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py
-            python3 get-pip.py --user
-            python3 -m pip install --user ansible
+            python3 get-pip.py
+            python3 -m pip install ansible
             ansible --help
       - run:
           name: prepare for deploy
