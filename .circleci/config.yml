@@ -325,12 +325,13 @@ jobs:
             cat .env
             npm i
             npm run build
+            tar -czf archive.tar.gz dist/
+            cp archive.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
       - run:
           name: Deploy backend
           environment:
             ANSIBLE_HOST_KEY_CHECKING: False          
           command: |
-            cp -R backend/dist* ~/project/.circleci/ansible/roles/deploy/files/
             cd .circleci/ansible
             echo "54.189.139.18" >> inventory.txt 
             ansible-playbook deploy-backend.yml -i inventory.txt
