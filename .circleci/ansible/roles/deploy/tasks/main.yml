@@ -6,7 +6,7 @@
 
 - name: Copy Files
   template:
-    src: "deploy/files/"
+    src: "files/"
     dest: "~/web/"
 
 - name: Executing node
