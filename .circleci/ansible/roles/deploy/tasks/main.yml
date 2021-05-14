@@ -1,14 +1,14 @@
 ---
-- name: Creates directory
-  file:
-    path: ~/web
-    state: directory
+#- name: Creates directory
+#  file:
+#    path: ~/web
+#    state: directory
 
-- name: Copy Files
-  become: yes
-  template:
-    src: "files/"
-    dest: "~/web/"
+#- name: Copy Files
+#  become: yes
+#  template:
+#    src: "files/"
+#    dest: "~/web/"
 
 #- name: Executing node
 #  shell: |
