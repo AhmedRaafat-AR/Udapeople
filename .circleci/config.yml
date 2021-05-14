@@ -320,6 +320,7 @@ jobs:
           name: prepare for deploy
           command: |
             ls -la
+            cat ~/.env
             cp .env backend/
             cd backend
             cat .env
