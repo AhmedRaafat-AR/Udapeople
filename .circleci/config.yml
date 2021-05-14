@@ -320,7 +320,8 @@ jobs:
       - run:
           name: prepare for deploy
           #environment:
-          #  ANSIBLE_HOST_KEY_CHECKING: False          
+          #  ANSIBLE_HOST_KEY_CHECKING: False
+           
           command: |
             cp ~/.env backend/
             cd backend
