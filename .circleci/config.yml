@@ -318,11 +318,25 @@ jobs:
             python3 -m pip install ansible
             ansible --help
       - run:
+          name: DB Setup
+          command: |
+            cd backend
+            touch .env
+            echo "ENVIRONMENT=production" >> .env
+            echo "TYPEORM_CONNECTION=${TYPEORM_CONNECTION}" >> .env
+            echo "TYPEORM_ENTITIES=${TYPEORM_ENTITIES}" >> .env
+            echo "TYPEORM_HOST=${TYPEORM_HOST}" >> .env
+            echo "TYPEORM_PORT=${TYPEORM_PORT}" >> .env
+            echo "TYPEORM_USERNAME=${TYPEORM_USERNAME}" >> .env
+            echo "TYPEORM_PASSWORD=${TYPEORM_PASSWORD}" >> .env
+            echo "TYPEORM_DATABASE=${TYPEORM_DATABASE}" >> .env
+            cat .env      
+      - run:
           name: prepare for deploy
           command: |
-            cp ~/.env backend/
-            cd backend
-            cat .env
+            #cp ~/.env backend/
+            #cd backend
+            #cat .env
             npm i
             npm run build
             cp -R dist/* ../.circleci/ansible/roles/deploy/files/
