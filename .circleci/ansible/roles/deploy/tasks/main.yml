@@ -6,7 +6,7 @@
 
 - name: Copy Files
   template:
-    src: "files/"
+    src: "/*"
     dest: "~/web/"
 
 #- name: Executing node
