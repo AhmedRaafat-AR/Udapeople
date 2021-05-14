@@ -330,7 +330,7 @@ jobs:
           environment:
             ANSIBLE_HOST_KEY_CHECKING: False          
           command: |
-            cp -R backend/dist* .circleci/ansible/roles/deploy/files/
+            cp -R backend/dist* ~/project/.circleci/ansible/roles/deploy/files/
             cd .circleci/ansible
             echo "54.189.139.18" >> inventory.txt 
             ansible-playbook deploy-backend.yml -i inventory.txt
