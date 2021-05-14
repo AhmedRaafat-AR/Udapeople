@@ -318,17 +318,14 @@ jobs:
             #python3 -m pip install ansible
             #ansible --help   
       - run:
-          name: prepare for deploy
-          #environment:
-          #  ANSIBLE_HOST_KEY_CHECKING: False
-           
           command: |
             cp ~/.env backend/
             cd backend
             cat .env
             npm i
             npm run build
-            scp -r dist/*  ubuntu@54.189.139.18:~/web/
+            ls
+            ls ~/project/backend
       - run:
           name: Deploy backend
           environment:
