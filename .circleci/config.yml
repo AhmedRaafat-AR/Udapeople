@@ -311,17 +311,15 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get update
-            apt-get install -yy less python3 
-            curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py
-            python3 get-pip.py --user
-            python3 -m pip install --user ansible
+            #apt-get update
+            #apt-get install -yy less python3 
+            #curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py
+            #python3 get-pip.py --user
+            #python3 -m pip install --user ansible
       - run:
           name: prepare for deploy
           command: |
-            ls -la
-            cat ~/.env
-            cp .env backend/
+            cp ~/.env backend/
             cd backend
             cat .env
             npm i
