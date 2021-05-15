@@ -41,7 +41,7 @@ export class ConfigService {
       BACKEND_PORT: Joi.number().default(3030),
       LOGGLY_SUBDOMAIN: Joi.string(),
       LOGGLY_TOKEN: Joi.string(),
-      TYPEORM_ENTITIES: Joi.string().default('./modules/domain/**/*.entity.{ts,js}'),
+      TYPEORM_ENTITIES: Joi.string().required(),
       TYPEORM_USERNAME: Joi.string().required(),
       TYPEORM_PASSWORD: Joi.string().required(),
       TYPEORM_DATABASE: Joi.string().required(),
