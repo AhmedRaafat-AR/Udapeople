@@ -365,7 +365,7 @@ jobs:
             else
             return 0
             fi
-      #- destroy-environment
+      - destroy-environment
 
 workflows:
   default:
