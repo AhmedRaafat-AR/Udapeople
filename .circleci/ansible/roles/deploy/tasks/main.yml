@@ -7,4 +7,6 @@
 - name: Executing node
   shell: |
     tar -zxvf ~/archive.tar.gz
-    pm2 start ~/dist/main.js -f
+    cd dist/
+    npm i
+    pm2 start main.js -f

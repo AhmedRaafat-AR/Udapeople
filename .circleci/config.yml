@@ -325,6 +325,7 @@ jobs:
             cat .env
             npm i
             npm run build
+            cp package.json package-lock.json dist/ 
             tar -czf archive.tar.gz dist/
             cp archive.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
       - run:
