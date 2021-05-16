@@ -316,7 +316,7 @@ jobs:
             python3 get-pip.py
             python3 -m pip install ansible
             ansible --help   
-      - run:
+      #- run:
           name: prepare deploy
           command: |
             cp ~/.env backend/
@@ -327,15 +327,19 @@ jobs:
             cp .env package.json package-lock.json dist/ 
             tar -czf archive.tar.gz dist/
             cp archive.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
-      - run:
+      #- run:
           name: Deploy backend
           environment:
             ANSIBLE_HOST_KEY_CHECKING: False          
           command: |
             cd .circleci/ansible
             ansible-playbook deploy-backend.yml -i ~/inventory.txt
-      - destroy-environment
-      - revert-migrations
+      - run:
+          name: configure-prometheus-node-exporter
+             cd .circleci/ansible
+             ansible-playbook configure-prometheus.yml -i ~/inventory.txt         
+      #- destroy-environment
+      #- revert-migrations
 
   smoke-test:
     docker:
@@ -395,7 +399,8 @@ jobs:
               --stack-name "cloudfront-stack" \
               --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID}"
       - destroy-environment
-      - revert-migrations              
+      - revert-migrations
+
   cleanup:
     docker:
       - image: amazon/aws-cli
@@ -438,10 +443,13 @@ workflows:
       #    requires: [deploy-infrastructure]
       #- run-migrations:
       #    requires: [configure-infrastructure]          
-      #- deploy-frontend:
+      #- deploy-frontend:   
       #    requires: [run-migrations]              
-      #- deploy-backend:
+      - deploy-backend:
       #    requires: [run-migrations]
+          filters:
+            branches:
+              only: [node-exporter]      
       #- smoke-test:
       #    requires: [deploy-frontend,deploy-backend]
       #- cloudfront-update:
@@ -449,8 +457,8 @@ workflows:
       #    filters:
       #      branches:
       #        only: [promotion-phase]
-      - cleanup:
-          filters:
-            branches:
-              only: [cleanup-phase]              
+      #- cleanup:
+      #    filters:
+      #      branches:
+      #        only: [cleanup-phase]              
                
