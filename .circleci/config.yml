@@ -340,7 +340,10 @@ jobs:
             ANSIBLE_HOST_KEY_CHECKING: False
           command: |         
              cd .circleci/ansible
-             ansible-playbook configure-prometheus.yml -i ~/inventory.txt         
+             aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID}" --output text >> inventory.txt
+             ansible-playbook configure-prometheus.yml -i inventory.txt         
       #- destroy-environment
       #- revert-migrations
 
