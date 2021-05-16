@@ -316,36 +316,36 @@ jobs:
             python3 get-pip.py
             python3 -m pip install ansible
             ansible --help   
-      #- run:
-      #    name: prepare deploy
-      #    command: |
-      #      cp ~/.env backend/
-      #      cd backend
-      #      cat .env
-      #      npm i
-      #      npm run build
-      #      cp .env package.json package-lock.json dist/ 
-      #      tar -czf archive.tar.gz dist/
-      #      cp archive.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
-      #- run:
-      #    name: Deploy backend
-      #    environment:
-      #      ANSIBLE_HOST_KEY_CHECKING: False          
-      #    command: |
-      #      cd .circleci/ansible
-      #      ansible-playbook deploy-backend.yml -i ~/inventory.txt
+      - run:
+          name: prepare deploy
+          command: |
+            cp ~/.env backend/
+            cd backend
+            cat .env
+            npm i
+            npm run build
+            cp .env package.json package-lock.json dist/ 
+            tar -czf archive.tar.gz dist/
+            cp archive.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
+      - run:
+          name: Deploy backend
+          environment:
+            ANSIBLE_HOST_KEY_CHECKING: False          
+          command: |
+            cd .circleci/ansible
+            ansible-playbook deploy-backend.yml -i ~/inventory.txt
       - run:
           name: configure-prometheus-node-exporter
           environment:
             ANSIBLE_HOST_KEY_CHECKING: False
           command: |         
              cd .circleci/ansible
-             aws ec2 describe-instances \
-              --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:project,Values=udapeople" --output text >> inventory.txt
-             ansible-playbook configure-prometheus.yml -i inventory.txt         
-      #- destroy-environment
-      #- revert-migrations
+            # aws ec2 describe-instances \
+            #  --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            #  --filters "Name=tag:project,Values=udapeople" --output text >> inventory.txt
+             ansible-playbook configure-prometheus.yml -i ~/inventory.txt         
+      - destroy-environment
+      - revert-migrations
 
   smoke-test:
     docker:
@@ -433,38 +433,30 @@ jobs:
 workflows:
   default:
     jobs:   
-      #- build-frontend
-      #- build-backend
-      #- test-frontend:
-      #    requires: [build-frontend]
-      #- test-backend:
-      #    requires: [build-backend]
-      #- scan-backend:
-      #    requires: [build-backend] 
-      #- scan-frontend:
-      #    requires: [build-frontend]
-      #- deploy-infrastructure:
-      #    requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-      #- configure-infrastructure:
-      #    requires: [deploy-infrastructure]
-      #- run-migrations:
-      #    requires: [configure-infrastructure]          
-      #- deploy-frontend:   
-      #    requires: [run-migrations]              
+      - build-frontend
+      - build-backend
+      - test-frontend:
+          requires: [build-frontend]
+      - test-backend:
+          requires: [build-backend]
+      - scan-backend:
+          requires: [build-backend] 
+      - scan-frontend:
+          requires: [build-frontend]
+      - deploy-infrastructure:
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]          
+      - deploy-frontend:   
+          requires: [run-migrations]              
       - deploy-backend:
-      #    requires: [run-migrations]
-          filters:
-            branches:
-              only: [node-exporter]      
-      #- smoke-test:
-      #    requires: [deploy-frontend,deploy-backend]
-      #- cloudfront-update:
-      #    requires: [smoke-test]
-      #    filters:
-      #      branches:
-      #        only: [promotion-phase]
-      #- cleanup:
-      #    filters:
-      #      branches:
-      #        only: [cleanup-phase]              
+          requires: [run-migrations]
+      - smoke-test:
+          requires: [deploy-frontend,deploy-backend]
+      - cloudfront-update:
+          requires: [smoke-test]
+      - cleanup:
+          requires: [cloudfront-update]         
                
