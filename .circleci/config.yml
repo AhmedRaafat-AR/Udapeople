@@ -317,23 +317,23 @@ jobs:
             python3 -m pip install ansible
             ansible --help   
       #- run:
-          name: prepare deploy
-          command: |
-            cp ~/.env backend/
-            cd backend
-            cat .env
-            npm i
-            npm run build
-            cp .env package.json package-lock.json dist/ 
-            tar -czf archive.tar.gz dist/
-            cp archive.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
+      #    name: prepare deploy
+      #    command: |
+      #      cp ~/.env backend/
+      #      cd backend
+      #      cat .env
+      #      npm i
+      #      npm run build
+      #      cp .env package.json package-lock.json dist/ 
+      #      tar -czf archive.tar.gz dist/
+      #      cp archive.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
       #- run:
-          name: Deploy backend
-          environment:
-            ANSIBLE_HOST_KEY_CHECKING: False          
-          command: |
-            cd .circleci/ansible
-            ansible-playbook deploy-backend.yml -i ~/inventory.txt
+      #    name: Deploy backend
+      #    environment:
+      #      ANSIBLE_HOST_KEY_CHECKING: False          
+      #    command: |
+      #      cd .circleci/ansible
+      #      ansible-playbook deploy-backend.yml -i ~/inventory.txt
       - run:
           name: configure-prometheus-node-exporter
           environment:
