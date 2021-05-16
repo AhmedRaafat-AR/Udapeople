@@ -336,6 +336,9 @@ jobs:
             ansible-playbook deploy-backend.yml -i ~/inventory.txt
       - run:
           name: configure-prometheus-node-exporter
+          environment:
+            ANSIBLE_HOST_KEY_CHECKING: False
+          command: |         
              cd .circleci/ansible
              ansible-playbook configure-prometheus.yml -i ~/inventory.txt         
       #- destroy-environment
