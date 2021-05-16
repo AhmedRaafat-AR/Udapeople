@@ -8,26 +8,24 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
+            aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID} --recursive
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID}"
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID}"
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
-    parameters:
-      # Add parameter here     
     steps:
       - run:
           name: Revert migrations
-          # Add when this will run
+          when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS = 1
+            SUCCESS = `curl -H "token: 84c5d1b7-bf5a-4e4b-86ab-62b35d9d7ec5" --request GET https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID}`
             if(( $SUCCESS==1 )); 
             then
-            #  cd ~/project/backend
-            #  npm install
-            #  Add revert code here. You can find this in the Getting Started section.
-              exit 1
+              cd ~/project/backend
+              npm install
+              npm runmigrations:revert
             fi
             
 jobs:
@@ -357,15 +355,16 @@ jobs:
       - run:
           name: Frontend smoke test.
           command: |
-            #URL="http://udapeople-${CIRCLE_WORKFLOW_ID}.s3-website-us-west-2.amazonaws.com"            
+            URL="http://udapeople-${CIRCLE_WORKFLOW_ID}.s3-website-us-west-2.amazonaws.com"            
 
-            #if curl -s ${URL} | grep "Welcome"
-            #then
-            #return 1
-            #else
-            #return 0
-            #fi
+            if curl -s ${URL} | grep "Welcome"
+            then
+            return 1
+            else
+            return 0
+            fi
       - destroy-environment
+      - revert-migrations
 
 workflows:
   default:
