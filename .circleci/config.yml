@@ -409,9 +409,8 @@ jobs:
 
             export STACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
             --stack-status-filter CREATE_COMPLETE --no-paginate --output text)
-      - run:
-          name: Remove old stacks and files
-          command: |
+
+            #Remove old stacks and files
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
