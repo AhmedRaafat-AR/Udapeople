@@ -246,13 +246,12 @@ jobs:
             cd backend
             cat .env
             npm i
-            npm run migrations > ~/migration_output.txt
+            npm run migrations:revert > ~/migration_r_output.txt
             cat ~/migration_output.txt
       - run:
           name: Send migration results to memstash
           command: |
-            cd backend
-            cstring=`grep -c "has been executed successfully" migration_output.txt || true`
+            cstring=`grep -c "has been executed successfully" ~/migration_output.txt || true`
             if [ "$cstring" -gt 0 ]
             then
             echo "Successful"
