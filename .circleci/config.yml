@@ -247,11 +247,11 @@ jobs:
             cat .env
             npm i
             npm run migrations:revert > ~/migration_r_output.txt
-            cat ~/migration_output.txt
+            cat ~/migration_r_output.txt
       - run:
           name: Send migration results to memstash
           command: |
-            cstring=`grep -c "has been executed successfully" ~/migration_output.txt || true`
+            cstring=`grep -c "has been executed successfully" ~/migration_r_output.txt || true`
             if [ "$cstring" -gt 0 ]
             then
             echo "Successful"
