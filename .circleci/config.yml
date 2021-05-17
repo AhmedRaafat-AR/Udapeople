@@ -34,8 +34,8 @@ jobs:
       - image: circleci/node:14.7.0
     steps:
       - checkout
-      #- restore_cache:
-      #    keys: [new-frontend-build]
+      - restore_cache:
+          keys: [new-frontend-build]
       - run:
           name: Install dependencies
           command: |
@@ -55,8 +55,8 @@ jobs:
       - image: circleci/node:14.7.0
     steps:
       - checkout
-      #- restore_cache:
-      #    keys: [new-backend-build]
+      - restore_cache:
+          keys: [new-backend-build]
       - run:
           name: Install dependencies
           command: |
@@ -73,11 +73,11 @@ jobs:
 
   test-frontend:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:14.7.0
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [new-frontend-build]
       - run:
           name: fix test 
           command: |
@@ -91,11 +91,11 @@ jobs:
 
   test-backend:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:14.7.0
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          keys: [new-backend-build]
       - run:
           name: test backend
           command: |
@@ -435,10 +435,10 @@ workflows:
     jobs:   
       - build-frontend
       - build-backend
-      #- test-frontend:
-      #    requires: [build-frontend]
-      #- test-backend:
-      #    requires: [build-backend]
+      - test-frontend:
+          requires: [build-frontend]
+      - test-backend:
+          requires: [build-backend]
       #- scan-backend:
       #    requires: [build-backend] 
       #- scan-frontend:
