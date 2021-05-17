@@ -104,11 +104,11 @@ jobs:
 
   scan-frontend:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:14.7.0
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [new-frontend-build]
       - run:
           name: fix scan
           command: |
@@ -122,11 +122,11 @@ jobs:
 
   scan-backend:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:14.7.0
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          keys: [new-backend-build]
       - run:
           name: fix scan
           command: |
