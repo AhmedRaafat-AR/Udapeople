@@ -244,7 +244,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            can .env
+            cat .env
             npm i
             npm run migrations > ~/migration_output.txt
             cat ~/migration_output.txt
